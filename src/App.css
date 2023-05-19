@@ -1,0 +1,106 @@
+*{
+  font-family: 'Open Sans', sans-serif;
+}
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color:white;
+}
+
+.Auth-form {
+  width: 830px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding: 30px 100px;
+  border-radius: 8px;
+  background-color:#dadfda;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+.Labelfield {
+  width: 150px;
+  display: inline-block;
+  margin: 10px ;
+  /* font-size: 14px;
+  font-weight: 600; */
+  /* color: rgb(34, 34, 34); */
+  /* text-align: right; */
+    /* clear: both; */
+    
+    /* margin-right:15px; */
+}
+/* .input-label{
+  width: 45px;
+} */
+
+.MuiGrid-root .MuiGrid-item .MuiGrid-grid-xs-6 .css-1osj8n2-MuiGrid-root{
+  padding: 0;
+  }
+  
+  .MuiInputBase-input .MuiOutlinedInput-input .MuiInputBase-inputSizeSmall .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input{
+  border-color: blue;
+  }
+select{
+  width: 250px;
+  display: inline-block;
+}
+
+.dropdown-basic{
+  color: gray;
+  /* font-weight: bold; */
+  background-color: white;
+  padding: 7px 0;
+  border-color: #d4d9d6;
+  border-radius: 5px;
+}
+textarea{
+  width: 250px;
+  border-color: #d4d9d6;
+}
+/* .viewmore-button{
+  
+    /* position: absolute; */
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%); */
+    /* background-color: transparent; */
+    /* color:#af493d; */
+    /* color:#968d8c;
+    border: 1.9px solid #c2bfbf;
+    font-family: 'Open Sans';
+    letter-spacing: 1.3px;
+    font-size: 10px;
+    padding: 10px 53px;
+    cursor: pointer;
+    text-align: center; */
+  
+  
+/* } */ */
+.btn-flat {
+  background-color: purple;
+  color: white;
+}
+
+.btn-xxl {
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+}
+.card{
+  height: -webkit-fill-available;
+  height: 500px;
+}

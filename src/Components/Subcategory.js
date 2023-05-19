@@ -31,9 +31,8 @@ export const Subcategory = () => {
                 <Row className="container-fluid g-3 m-2" xs={2} sm={2} md={3} lg={4} xl={4}>
                     {lists.map((item, index) => (
                         <Col key={index}>
-                            <Link to={`${item.id}`} style={{ textDecoration: 'none', color: '#202124' }}>
+                            <Link to={`${item.name}`} style={{ textDecoration: 'none', color: '#202124' }}>
                                 <Card className="card">
-
                                     <Card.Img variant="top" src={item.image} alt="" />
                                     <Card.Body>
                                         <center><Card.Title style={{ fontSize: "1rem" }}>{item.name}</Card.Title></center>

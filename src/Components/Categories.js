@@ -11,8 +11,9 @@ export const Categories = () => {
 
   const [data, setData] = useState([]);
   const [cmtrId ,setCmtrId] = useState('')
-
+ 
   const [customerData, setCustomerData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   //  const handleInputChange =(value)=>{
 
@@ -35,7 +36,7 @@ export const Categories = () => {
         .then((response) => response.json())
         .then((result) => {
           setData(result)
-         
+          
         })
         .catch(error => console.log(error))
   }
@@ -49,6 +50,15 @@ export const Categories = () => {
 
         </form>
       <div className="p-2">
+      {/* <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form> */}
+
         <Row xs={2} sm={2} md={3} lg={4} xl={4} className="g-3 m-2 " >
           {(customerData.length > 0 ? customerData : data).map((categories, index) =>
           (

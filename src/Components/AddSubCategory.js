@@ -67,11 +67,11 @@ const AddSubCategory = () => {
             .then((res) => res.json())
             .then((data) => {
                 setData(data)
-                // setShowSuccessMessage(true);
-                // setTimeout(() => {
-                //     setShowSuccessMessage(false);
-                // }, 1000)
-                // window.location.reload();
+                setShowSuccessMessage(true);
+                setTimeout(() => {
+                    setShowSuccessMessage(false);
+                }, 1000)
+                window.location.reload();
 
 
             })

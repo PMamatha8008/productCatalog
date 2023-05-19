@@ -9,10 +9,12 @@ export const ProductTable = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedData, setEditedData] = useState({});
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
 
 
   const handleDeleteClick = (id) => {
+
     fetch(`http://localhost:8000/delete_product/${id}`, {
       method: "DELETE",
     })
@@ -24,13 +26,15 @@ export const ProductTable = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_product')
+    fetch('http://localhost:8000/get-product')
       .then((res) => res.json())
       .then((data) => {
         setData(data)
         console.log(data)
       })
       .catch((error) => console.log(error))
+
+      
   }, [])
 
   const handleEditClick = (item) => {
@@ -57,26 +61,37 @@ export const ProductTable = () => {
       .catch((error) => console.log(error));
   };
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+
   return (
     <>
-      
+      <div className="p-5">
       <table className="table">
         <thead>
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
-            <th scope="col">weight</th>
-            <th scope="col">categoryId</th>
-            <th scope="col">subCategoryId</th>
-            <th scope="col">description</th>
+            <th scope="col">Weight</th>
+            <th scope="col">CategoryId</th>
+            <th scope="col">SubCategoryId</th>
+            <th scope="col">Description</th>
             <th scope="col">Edit</th>
-            <th scope="col">delete</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
           {Array.isArray(data) && data.length > 0 ? (
             data.map((item) => (
               <tr key={item.id}>
+                <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.weight}</td>
@@ -99,7 +114,18 @@ export const ProductTable = () => {
         </tbody>
 
       </table>
-      
+      </div>
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+          <button
+            key={pageNumber}
+            className={currentPage === pageNumber ? "active" : ""}
+            onClick={() => handlePageChange(pageNumber)}
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
 
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>

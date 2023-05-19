@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import OutlinedInput from "@mui/material/OutlinedInput";
-
-import { FloatingLabel, Form } from 'react-bootstrap'
-
+import { ProductTable } from './ProductTable';
 
 const AddProductDetails = () => {
     const textFieldStyles = {
@@ -155,11 +153,11 @@ const AddProductDetails = () => {
         })
             .then(response => response.json())
             .then(data => {
-                // setShowSuccessMessage(true);
-                // setTimeout(() => {
-                //     setShowSuccessMessage(false);
-                //   }, 2000)
-                //   window.location.reload();
+                setShowSuccessMessage(true);
+                setTimeout(() => {
+                    setShowSuccessMessage(false);
+                  }, 2000)
+                  window.location.reload();
                 console.log(data)
             })
             .catch(error => {
@@ -174,8 +172,11 @@ const AddProductDetails = () => {
 
     return (
         <>
-            <div className="Auth-form-container ">
-                <form onSubmit={handleSubmit}>
+           
+            <Grid container>
+  <Grid item xs={12}>
+                <center>
+                <form onSubmit={handleSubmit} >
                     <div >
                         <h3 className="Auth-form-title">Product Details</h3>
                         <div>
@@ -373,7 +374,14 @@ const AddProductDetails = () => {
                         </div>
                     </div>
                 </form>
-            </div>
+                </center>
+                </Grid>
+                
+                <Grid item xs={12}>
+                <ProductTable />
+                </Grid>
+                </Grid>
+       
         </>
     )
 }

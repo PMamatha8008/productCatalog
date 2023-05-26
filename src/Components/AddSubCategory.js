@@ -1,4 +1,4 @@
-import { Button, FormControl, InputLabel, Select, MenuItem, TextField, styled } from '@mui/material';
+import { Button, FormControl, InputLabel, Select, MenuItem, TextField, styled, Box, Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 
 
@@ -13,24 +13,26 @@ const AddSubCategory = () => {
 
     const imgPath = window.location.origin
 
-    // const CustomSelect = styled(Select)({
-    //     '& .MuiOutlinedInput-root': {
-    //         '& fieldset': {
-    //             borderColor: 'red', // Replace 'red' with your desired border color
-    //         },
-    //         '&:hover fieldset': {
-    //             borderColor: 'blue', // Replace 'blue' with your desired border color on hover
-    //         },
-    //     },
-    //     '& .MuiInputBase-input': {
-    //         color: '#1976D2',
-    //         fontSize: '15px',
-    //     },
-    //     '& .MuiInputLabel-root': {
-    //         color: '#1976D2',
-    //         fontSize: '15px',
-    //     },
-    // });
+    const textFieldStyles = {
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#1976D2',
+            },
+            '&:hover fieldset': {
+                borderColor: '#1976D2',
+            },
+        },
+        '& .MuiInputBase-input': {
+            color: '#1976D2',
+            fontSize: '15px',
+            fontFamily: 'Open Sans',
+        },
+        '& .MuiInputLabel-root': {
+            color: '#1976D2',
+            fontSize: '13px',
+            fontFamily: 'Open Sans',
+        },
+    }
 
     useEffect(() => {
         fetch('http://localhost:8000/get-category')
@@ -67,11 +69,11 @@ const AddSubCategory = () => {
             .then((res) => res.json())
             .then((data) => {
                 setData(data)
-                // setShowSuccessMessage(true);
-                // setTimeout(() => {
-                //     setShowSuccessMessage(false);
-                // }, 1000)
-                // window.location.reload();
+                setShowSuccessMessage(true);
+                setTimeout(() => {
+                    setShowSuccessMessage(false);
+                }, 1000)
+                window.location.reload();
 
 
             })
@@ -88,12 +90,41 @@ const AddSubCategory = () => {
 
     return (
         <>
-            <div className="Auth-form-container">
-                <form onSubmit={handlesubmit}>
+            <div
+                style={{
+                    // backgroundColor: '#f2f2f2',
+                    minHeight: '100vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
 
-                    <h3 className="Auth-form-title">Add sub category</h3>
-                    <div >
-                        {/* <label>
+                    // padding: '20px',
+                }}
+            >
+                <Paper elevation={10} >
+                    <form onSubmit={handlesubmit}>
+                        <Box
+                            display="flex"
+                            flexDirection={"column"}
+                            maxWidth={400}
+                            backgroundColor="white"
+                            alignItems="center"
+                            justifyContent={"center"}
+                            // margin="auto"
+                            // minHeight= '100vh'
+                            // marginTop={25}
+                            padding="40px 60px"
+                            borderRadius={3}
+                        // boxShadow={'5px 5px 10px #ccc'}
+                        // sx={{
+                        //     ":hover": {
+                        //         boxShadow: "10px 10px 20px #ccc"
+                        //     }
+                        // }}
+                        >
+                            <h3 className="Auth-form-title">Add Sub Category</h3>
+
+                            {/* <label>
                             Category
                         </label>
 
@@ -104,135 +135,115 @@ const AddSubCategory = () => {
                             ))}
 
                         </select> */}
-                        <FormControl sx={{ m: 1, width: 400 }}>
-                            <InputLabel id="categoryId-label" sx={{
-                                color: '#1976D2',
-                                fontSize: '15px',
-                            }}>Category</InputLabel>
-                            <Select
-                                labelId="categoryId-label"
-                                id="categoryId"
-                                size='small'
-                                value={selectedId}
-                                onChange={(event) => setSelectedId(event.target.value)}
+                            <FormControl sx={{ m: 1, width: 300 }}>
 
-                                label="Category"
-                                sx={{
-                                    "&.MuiOutlinedInput-root": {
-                                        "& fieldset": {
-                                            borderColor: "#1976D2",
-                                        },
-                                        "&:hover fieldset": {
-                                            borderColor: "#1976D2"
-                                        },
-                                        "&.Mui-focused fieldset": {
-                                            borderColor: "#1976D2"
+                                <TextField
+                                    // labelId="categoryId-label"
+                                    label="Category"
+                                    id="categoryId"
+                                    size='small'
+                                    value={selectedId}
+                                    select
+                                    displayEmpty
+                                    onChange={(event) => setSelectedId(event.target.value)}
+                                    sx={textFieldStyles}
+                                >
+
+                                    {value.map((item) => (
+                                        <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
+                                    ))}
+                                </TextField>
+                            </FormControl>
+
+                            <FormControl sx={{ m: 1, width: 300 }}>
+                                <TextField
+                                    label="Add sub category"
+                                    variant="outlined"
+                                    size='small'
+                                    type="text"
+                                    value={data.name}
+                                    onChange={(e) => setData({ ...data, name: e.target.value })}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': {
+                                                borderColor: '#1976D2',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#1976D2',
+                                            },
                                         },
                                         '& .MuiInputBase-input': {
                                             color: '#1976D2',
                                             fontSize: '15px',
+                                            fontFamily: 'Open Sans',
                                         },
                                         '& .MuiInputLabel-root': {
                                             color: '#1976D2',
-                                            fontSize: '15px',
-                                        },
-                                    }
-
-                                }}
-                            >
-
-                                {value.map((item) => (
-                                    <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                    <div>
-                        <FormControl sx={{ m: 1, width: 400 }}>
-                            <TextField
-                                label="Add sub category"
-                                variant="outlined"
-                                size='small'
-                                type="text"
-                                value={data.name}
-                                onChange={(e) => setData({ ...data, name: e.target.value })}
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        '& fieldset': {
-                                            borderColor: '#1976D2',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: '#1976D2',
-                                        },
-                                    },
-                                    '& .MuiInputBase-input': {
-                                        color: '#1976D2',
-                                        fontSize: '15px',
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        color: '#1976D2',
-                                        fontSize: '15px',
-                                    },
-                                }}
-                            />
-                        </FormControl>
-                    </div>
-                    <div>
-                        <FormControl sx={{ m: 1, width: 400 }}>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                hidden
-                                id="productImage"
-                                name="productImage"
-                                defaultValue={data.image}
-                                // onChange={(e)=>setData(({...data ,image:e.target.value}))}
-                                onChange={(e) => setData(data => ({ ...data, image: imgPath + /images/ + e.target.files[0].name }))}
-                            />
-                            <label htmlFor="productImage">
-                                <Button
-                                    variant="outlined"
-                                    component="span"
-                                    sx={{
-                                        width: 400,
-
-                                        borderColor: '#1976D2', // Change the border color to blue
-                                        '&:hover': {
-                                            borderColor: '#1976D2', // Change the border color on hover to blue
+                                            fontSize: '13px',
+                                            fontFamily: 'Open Sans',
                                         },
                                     }}
-                                >
-                                    <span
-                                        style={{
-                                            fontSize: '12px', // Decrease the font size to 12px
+                                />
+                            </FormControl>
+
+                            <FormControl sx={{ m: 1, width: 300 }}>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    hidden
+                                    id="productImage"
+                                    name="productImage"
+                                    defaultValue={data.image}
+                                    // onChange={(e)=>setData(({...data ,image:e.target.value}))}
+                                    onChange={(e) => setData(data => ({ ...data, image: /images/ + e.target.files[0].name }))}
+                                />
+                                <label htmlFor="productImage">
+                                    <Button
+                                        variant="outlined"
+                                        component="span"
+                                        sx={{
+                                            width: 300,
+
+                                            borderColor: '#f09916',
+                                            '&:hover': {
+                                                borderColor: '#f09916',
+                                            },
                                         }}
                                     >
-                                        Upload Image
-                                    </span>
+                                        <span
+                                            style={{
+                                                fontSize: '12px',
+                                                color: '#f09916'
+                                            }}
+                                        >
+                                            Upload Image
+                                        </span>
 
-                                </Button>
-                            </label>
-                        </FormControl>
-                    </div>
+                                    </Button>
+                                </label>
+                            </FormControl>
 
-                    <div style={{ textAlign: 'center' }}>
-                        <button type="button"
-                            // onClick={handleClearButtonClick}
-                            // onClick={() => setData({...data ,name:''})}
-                            className="btn btn-primary btn-lg btn-sm  my-3"
-                            style={{ paddingRight: '25px', paddingLeft: '25px', backgroundColor: '#035F9B', marginRight: '9px' }}
-                        >
-                            Clear
-                        </button>
-                        <button
-                            type="submit"
-                            className="btn btn-primary btn-lg btn-sm my-3"
-                            style={{ paddingRight: '25px', paddingLeft: '25px', backgroundColor: '#035F9B', marginRight: '9px' }}
-                        >
-                            Save
-                        </button>
-                    </div>
-                </form>
+
+                            <div style={{ textAlign: 'center' }}>
+                                <button type="button"
+                                    // onClick={handleClearButtonClick}
+                                    // onClick={() => setData({...data ,name:''})}
+                                    className="btn btn-primary btn-lg btn-sm  my-3"
+                                    style={{ paddingRight: '25px', paddingLeft: '25px', backgroundColor: '#035F9B', marginRight: '9px' }}
+                                >
+                                    Clear
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary btn-lg btn-sm my-3"
+                                    style={{ paddingRight: '25px', paddingLeft: '25px', backgroundColor: '#035F9B', marginRight: '9px' }}
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </Box>
+                    </form>
+                </Paper>
             </div>
         </>
     )

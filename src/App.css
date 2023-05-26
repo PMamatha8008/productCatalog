@@ -104,3 +104,12 @@ textarea{
   height: -webkit-fill-available;
   height: 500px;
 }
+
+.btn-viewmore{
+  text-transform: none;
+  color:#832729;
+  border: 1px solid #832729;
+  padding:3% 20%;
+  background-color: transparent;
+  font-size: 0.8rem;
+}

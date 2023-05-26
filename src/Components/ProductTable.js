@@ -24,7 +24,7 @@ export const ProductTable = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_product')
+    fetch('http://localhost:8000/get-product')
       .then((res) => res.json())
       .then((data) => {
         setData(data)
